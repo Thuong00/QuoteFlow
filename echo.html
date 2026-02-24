@@ -118,15 +118,25 @@
             margin-right: auto;
             line-height: 1.5;
         }
-        #button-area {
+        /* #button-area {
             margin-top: auto;
-        }
+        } */
         /* Tối ưu riêng cho điện thoại */
         @media (max-width: 600px) {
+        .quote-box {
+            /* Đảm bảo cách đều lề trái/phải 20px */
+            width: calc(100% - 40px); 
+            padding: 30px 20px; /* Giảm padding bên trong một chút để tăng không gian chữ */
+            margin-bottom: 20px;
+        }
         .footer-text {
                 font-size: 1.2rem; /* Trên điện thoại chữ sẽ to rõ hơn */
                 max-width: 250px;  /* Ép xuống dòng hẹp hơn để đẹp mắt */
             }
+        .particle {
+            /* Nhỏ bằng 1/2 so với máy tính */
+            font-size: 12px !important; 
+        }
         }
 
         @keyframes fall {
