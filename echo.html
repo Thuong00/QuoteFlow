@@ -6,22 +6,18 @@
     <title>Quote Inspiration - Random Background</title>
     <style>
         body, html {
-            margin: 0; padding: 0; width: 100%; height: 100%;
-            overflow-y: auto;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* Giấu thanh cuộn (cho Chrome, Safari, Edge) */
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;   /* chỉ chặn ngang */
+            overflow-y: auto;     /* cho phép scroll dọc */
         }
-        
-        /* Giấu thanh cuộn cho Chrome/Safari */
-        body::-webkit-scrollbar {
-            display: none;
-        }
+
         /* Lớp nền */
         #bg-layer {
             position: fixed;
-            top: 0; left: 0; width: 100%; heigtht: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background-size: cover;
             background-position: center;
             transition: background-image 0.8s ease-in-out; /* Hiệu ứng chuyển ảnh mượt mà */
@@ -41,12 +37,11 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            min-height: 100vh
+            min-height: 100vh;
             padding: 0 20px;
             text-align: center;
             position: relative;
             z-index: 5; /* Thấp hơn hạt rơi */
-            box-sizing: border-box;
         }
 
         .quote-box {
@@ -123,11 +118,13 @@
             margin-right: auto;
             line-height: 1.5;
         }
-
+        #button-area {
+            margin-top: auto;
+        }
         /* Tối ưu riêng cho điện thoại */
         @media (max-width: 600px) {
         .footer-text {
-                font-size: 1rem; 
+                font-size: 1.2rem; /* Trên điện thoại chữ sẽ to rõ hơn */
                 max-width: 250px;  /* Ép xuống dòng hẹp hơn để đẹp mắt */
             }
         }
