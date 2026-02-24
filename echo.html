@@ -176,65 +176,65 @@
     <script>
         // 1. Danh sách Quotes
         const quoteList = [
-            { text: "Mọi hành trình vạn dặm đều khởi nguồn từ một bước chân.", author: "Lão Tử" },
-            { text: "Bạn không sợ thất bại, bạn chỉ sợ mình không đủ giỏi — và chính nỗi sợ đó đang giữ bạn ở mức an toàn.", author: "" },
-            { text: "Có những cánh cửa không mở ra khi bạn sẵn sàng, mà mở ra khi bạn dám bước dù còn run.", author: "" },
-            { text: "Cảm giác mình thua kém không phải dấu hiệu nên rút lui, mà là bằng chứng bạn đã bước vào một căn phòng lớn hơn.", author: "" },
-            { text: "Bạn nghĩ quá nhiều về hậu quả, nhưng quên rằng không hành động cũng là một hậu quả.", author: "" },
-            { text: "Sự hoàn hảo bạn theo đuổi đôi khi chỉ là lớp áo đẹp của nỗi sợ bị đánh giá.", author: "" },
-            { text: "Không ai trở thành chuyên gia vì họ luôn tự tin; họ trở thành chuyên gia vì họ không biến mất khi còn chưa tự tin.", author: "" },
-            { text: "Mỗi lần bạn trì hoãn vì chưa đủ tốt, bạn đang chọn sự dễ chịu ngắn hạn thay cho phiên bản mạnh mẽ dài hạn.", author: "" },
-            { text: "Bạn không cần chắc chắn toàn bộ con đường, bạn chỉ cần đủ can đảm cho bước kế tiếp.", author: "" },
-            { text: "Đêm khuya khiến nỗi lo trông có vẻ lớn hơn thực tế; sáng mai tỉnh dậy, mọi thứ sẽ nhỏ lại.", author: "" },
-            { text: "Bạn không thiếu thời gian, bạn đang tiêu nó cho những thứ không dám nhìn lại vào sáng hôm sau.", author: "" },
-            { text: "Thức đến 2 giờ sáng không làm bạn tự do hơn, nó chỉ làm ngày mai của bạn yếu đi.", author: "" },
-            { text: "Dopamine rẻ luôn dễ kiếm; giá của nó là sự tập trung đắt giá mà bạn đánh mất.", author: "" },
-            { text: "Không phải bạn nghiện điện thoại, bạn đang trốn khỏi cảm giác phải bắt đầu.", author: "" },
-            { text: "Một giờ lướt vô thức có thể phá hỏng tám giờ kỷ luật bạn cố gắng xây dựng.", author: "" },
-            { text: "Thói quen xấu không hủy bạn trong một đêm, nó bào mòn bạn bằng những đêm như thế.", author: "" },
-            { text: "Bạn nói mình muốn đi khám phá thế giới, nhưng mỗi tối lại tự cắt ngắn năng lượng của ngày mai.", author: "" },
-            { text: "Sự thoải mái ngắn hạn luôn thì thầm rất dịu dàng, còn mục tiêu dài hạn thì nói ít và đòi hỏi nhiều.", author: "" },
-            { text: "Mỗi lần bạn đặt điện thoại xuống sớm hơn, bạn không mất niềm vui — bạn đang giành lại quyền kiểm soát.", author: "" },
-            { text: "Tắt màn hình không phải là bỏ lỡ điều gì, mà là chọn không bỏ lỡ chính mình.", author: "" },
-            { text: "Mỗi ngày bạn không đọc, thế giới vẫn tiến lên — chỉ có bạn đứng lại.", author: "" },
-            { text: "Kiến thức không làm bạn mệt; sự trì hoãn mới làm bạn nặng lòng.", author: "" },
-            { text: "Đọc mỗi ngày không phải để biết nhiều hơn người khác, mà để không thua chính mình của hôm qua.", author: "" },
-            { text: "Một trang tài liệu hôm nay có thể là nền móng cho một bước nhảy một năm nữa.", author: "" },
-            { text: "Bạn không trở thành chuyên gia trong một đột phá, mà trong hàng trăm lần đọc khi chẳng ai yêu cầu.", author: "" },
-            { text: "Không phải lúc nào bạn cũng hứng thú, nhưng bạn luôn có thể chọn nhất quán.", author: "" },
-            { text: "Đọc khi không ai ép bạn là lúc bạn thật sự xây dựng tương lai của mình.", author: "" },
-            { text: "Nếu bạn chỉ tiêu thụ nội dung dễ nuốt, bạn sẽ mãi đói với những vấn đề khó.", author: "" },
-            { text: "Mỗi ngày một chút hiểu sâu hơn là cách duy nhất để đi xa mà không ồn ào.", author: "" },
-            { text: "Bạn không cần đọc tất cả, bạn chỉ cần đọc đủ lâu để kiến thức bắt đầu kết nối.", author: "" },
-            { text: "Thói quen đọc không thay đổi bạn trong một tuần, nhưng nó âm thầm tái cấu trúc bạn trong vài năm.", author: "" },
-            { text: "Nếu hôm nay bạn không cập nhật, ngày mai bạn sẽ phải bắt kịp trong mệt mỏi.", author: "" },
-            { text: "Một trang tài liệu mỗi ngày nghe có vẻ nhỏ, nhưng một năm sau nó là khoảng cách.", author: "" },
-            { text: "Khi bạn đọc, bạn đang trò chuyện với người giỏi hơn mình — miễn phí.", author: "" },
-            { text: "Thời điểm để cập nhật kiến thức mới là NGAY BÂY GIỜ. Đừng đợi đến khi đọc xong cuốn sách tiếp theo", author: "" },
-            { text: "Đếm đến 5 và bước đi. Vũ trụ sẽ lo phần đường đi, việc của bạn là cất bước.", author: "" },
-            { text: "Sự hoàn hảo là một cái bẫy. Sự dang dở nhưng bắt đầu mới là hạt giống của thành công.", author: "" },
-            { text: "Ngọn lửa trong tim bạn cần hành động để cháy sáng, không phải cần sự lo âu để duy trì.", author: "" },
-            { text: "Đừng đợi đến khi thấy hết con đường. Chỉ cần thấy bước tiếp theo là đủ.", author: "" },
-            { text: "Hôm nay, hãy chọn làm điều bạn sợ nhất. Phía sau nỗi sợ là tự do.", author: "" },
-            { text: "Giáp Mộc cần đất để bám rễ. Hãy tập trung vào những việc nhỏ nhặt nhất ngay dưới chân bạn.", author: "" },
-            { text: "Kết quả thực tế là liều thuốc tốt nhất cho sự do dự.", author: "" },
-            { text: "Hôm nay, hãy hoàn thành thay vì chỉ lên kế hoạch.", author: "" },
-            { text: "Mọi dòng sông đều đổ ra biển. Những lo âu hôm nay cũng sẽ trôi đi, hãy để chúng đi.", author: "" },
-            { text: "Bạn không cần phải trở thành một 'phiên bản hoàn hảo' của ai đó. Hãy là một 'phiên bản hành động' của chính mình.", author: "" },
-            { text: "Áp lực của Kim chỉ để gọt giũa Mộc thành hình. Đừng để nó đè bẹp sức sống của bạn.", author: "" },
-            { text: "Hít một hơi thật sâu. Bạn đang ở đây, ngay lúc này, và bạn đủ tốt.", author: "" },
-            { text: "Cái gì đẹp cũng có thời điểm. Đừng đợi đến khi mọi thứ hoàn hảo mới đi, vì khoảnh khắc sẽ qua mất.", author: "" },
-            { text: "Bản năng của bạn là vươn xa. Đừng để sự an toàn giả tạo kìm hãm đôi chân Giáp Ngọ của mình.", author: "" },
-            { text: "Vũ trụ đang biểu diễn một vở kịch rực rỡ. Bạn muốn làm khán giả qua màn hình hay người chứng kiến tận mắt?", author: "" },
-            { text: "Gió không bao giờ do dự, nó chỉ thổi. Hãy để trực giác dẫn đường, lý trí chỉ là người cầm bản đồ thôi.", author: "" },
-            { text: "Bớt suy nghĩ rác (overthinking), nạp thêm dữ liệu thực tế. Kết quả của bạn sẽ rõ ràng như một thuật toán tối ưu.", author: "" },
-            { text: "Xu hướng là làn gió, nền tảng là rễ cây. Giáp Mộc muốn vươn cao trong ngành AI thì rễ phải bám sâu vào cơ bản.", author: "" },
-            { text: "Chuyên gia không sinh ra từ lý thuyết. Họ sinh ra từ những lỗi 'Bug' đã được sửa. Bắt tay vào làm ngay!", author: "" },
-            { text: "Dừng phân tích, bắt đầu cảm nhận.", author: "" },
-            { text: "Quăng bản đồ sang một bên đi! Trái tim bạn đã thuộc đường rồi, việc của bạn chỉ là hít một hơi thật sâu và để linh cảm dẫn lối thôi.", author: "" },
-            { text: "Tín hiệu là 'Có'. Câu hỏi là 'Khi nào?'", author: "" },
-            { text: "Một bước chân thực tế đáng giá hơn một vạn dặm trong tâm tưởng.", author: "" },
-            { text: "Thảo nguyên bao la không hiện ra trong đầu kẻ đứng yên. Chỉ cần một cú phi nước đại thực sự, cả thế giới mới sẽ mở ra ngay dưới móng ngựa của bạn!", author: "" }
+            {cat:"day", text: "Mọi hành trình vạn dặm đều khởi nguồn từ một bước chân.", author: "Lão Tử" },
+            {cat:"day", text: "Bạn không sợ thất bại, bạn chỉ sợ mình không đủ giỏi — và chính nỗi sợ đó đang giữ bạn ở mức an toàn.", author: "" },
+            {cat:"day", text: "Có những cánh cửa không mở ra khi bạn sẵn sàng, mà mở ra khi bạn dám bước dù còn run.", author: "" },
+            { cat:"day", text: "Cảm giác mình thua kém không phải dấu hiệu nên rút lui, mà là bằng chứng bạn đã bước vào một căn phòng lớn hơn.", author: "" },
+            {cat:"day", text: "Bạn nghĩ quá nhiều về hậu quả, nhưng quên rằng không hành động cũng là một hậu quả.", author: "" },
+            {cat:"day", text: "Sự hoàn hảo bạn theo đuổi đôi khi chỉ là lớp áo đẹp của nỗi sợ bị đánh giá.", author: "" },
+            {cat:"day", text: "Không ai trở thành chuyên gia vì họ luôn tự tin; họ trở thành chuyên gia vì họ không biến mất khi còn chưa tự tin.", author: "" },
+            {cat:"day", text: "Mỗi lần bạn trì hoãn vì chưa đủ tốt, bạn đang chọn sự dễ chịu ngắn hạn thay cho phiên bản mạnh mẽ dài hạn.", author: "" },
+            {cat:"day", text: "Bạn không cần chắc chắn toàn bộ con đường, bạn chỉ cần đủ can đảm cho bước kế tiếp.", author: "" },
+            {cat:"night", text: "Đêm khuya khiến nỗi lo trông có vẻ lớn hơn thực tế; sáng mai tỉnh dậy, mọi thứ sẽ nhỏ lại.", author: "" },
+            {cat:"night", text: "Bạn không thiếu thời gian, bạn đang tiêu nó cho những thứ không dám nhìn lại vào sáng hôm sau.", author: "" },
+            {cat:"night", text: "Thức đến 2 giờ sáng không làm bạn tự do hơn, nó chỉ làm ngày mai của bạn yếu đi.", author: "" },
+            {cat:"day", text: "Dopamine rẻ luôn dễ kiếm; giá của nó là sự tập trung đắt giá mà bạn đánh mất.", author: "" },
+            {cat:"day", text: "Không phải bạn nghiện điện thoại, bạn đang trốn khỏi cảm giác phải bắt đầu.", author: "" },
+            {cat:"day", text: "Một giờ lướt vô thức có thể phá hỏng tám giờ kỷ luật bạn cố gắng xây dựng.", author: "" },
+            {cat:"night", text: "Thói quen xấu không hủy bạn trong một đêm, nó bào mòn bạn bằng những đêm như thế.", author: "" },
+            {cat:"night", text: "Bạn nói mình muốn đi khám phá thế giới, nhưng mỗi tối lại tự cắt ngắn năng lượng của ngày mai.", author: "" },
+            {cat:"day", text: "Sự thoải mái ngắn hạn luôn thì thầm rất dịu dàng, còn mục tiêu dài hạn thì nói ít và đòi hỏi nhiều.", author: "" },
+            {cat:"day", text: "Mỗi lần bạn đặt điện thoại xuống sớm hơn, bạn không mất niềm vui — bạn đang giành lại quyền kiểm soát.", author: "" },
+            {cat:"night", text: "Tắt màn hình không phải là bỏ lỡ điều gì, mà là chọn không bỏ lỡ chính mình.", author: "" },
+            {cat:"day", text: "Mỗi ngày bạn không đọc, thế giới vẫn tiến lên — chỉ có bạn đứng lại.", author: "" },
+            {cat:"day", text: "Kiến thức không làm bạn mệt; sự trì hoãn mới làm bạn nặng lòng.", author: "" },
+            {cat:"day", text: "Đọc mỗi ngày không phải để biết nhiều hơn người khác, mà để không thua chính mình của hôm qua.", author: "" },
+            {cat:"day", text: "Một trang tài liệu hôm nay có thể là nền móng cho một bước nhảy một năm nữa.", author: "" },
+            {cat:"day", text: "Bạn không trở thành chuyên gia trong một đột phá, mà trong hàng trăm lần đọc khi chẳng ai yêu cầu.", author: "" },
+            {cat:"day", text: "Không phải lúc nào bạn cũng hứng thú, nhưng bạn luôn có thể chọn nhất quán.", author: "" },
+            {cat:"day", text: "Đọc khi không ai ép bạn là lúc bạn thật sự xây dựng tương lai của mình.", author: "" },
+            {cat:"day", text: "Nếu bạn chỉ tiêu thụ nội dung dễ nuốt, bạn sẽ mãi đói với những vấn đề khó.", author: "" },
+            {cat:"day", text: "Mỗi ngày một chút hiểu sâu hơn là cách duy nhất để đi xa mà không ồn ào.", author: "" },
+            {cat:"day", text: "Bạn không cần đọc tất cả, bạn chỉ cần đọc đủ lâu để kiến thức bắt đầu kết nối.", author: "" },
+            {cat:"day", text: "Thói quen đọc không thay đổi bạn trong một tuần, nhưng nó âm thầm tái cấu trúc bạn trong vài năm.", author: "" },
+            {cat:"day", text: "Nếu hôm nay bạn không cập nhật, ngày mai bạn sẽ phải bắt kịp trong mệt mỏi.", author: "" },
+            {cat:"day", text: "Một trang tài liệu mỗi ngày nghe có vẻ nhỏ, nhưng một năm sau nó là khoảng cách.", author: "" },
+            {cat:"day", text: "Khi bạn đọc, bạn đang trò chuyện với người giỏi hơn mình — miễn phí.", author: "" },
+            {cat:"day", text: "Thời điểm để cập nhật kiến thức mới là NGAY BÂY GIỜ. Đừng đợi đến khi đọc xong cuốn sách tiếp theo", author: "" },
+            {cat:"day", text: "Đếm đến 5 và bước đi. Vũ trụ sẽ lo phần đường đi, việc của bạn là cất bước.", author: "" },
+            {cat:"day", text: "Sự hoàn hảo là một cái bẫy. Sự dang dở nhưng bắt đầu mới là hạt giống của thành công.", author: "" },
+            {cat:"day", text: "Ngọn lửa trong tim bạn cần hành động để cháy sáng, không phải cần sự lo âu để duy trì.", author: "" },
+            {cat:"day", text: "Đừng đợi đến khi thấy hết con đường. Chỉ cần thấy bước tiếp theo là đủ.", author: "" },
+            {cat:"day", text: "Hôm nay, hãy chọn làm điều bạn sợ nhất. Phía sau nỗi sợ là tự do.", author: "" },
+            {cat:"day", text: "Giáp Mộc cần đất để bám rễ. Hãy tập trung vào những việc nhỏ nhặt nhất ngay dưới chân bạn.", author: "" },
+            {cat:"day", text: "Kết quả thực tế là liều thuốc tốt nhất cho sự do dự.", author: "" },
+            {cat:"day", text: "Hôm nay, hãy hoàn thành thay vì chỉ lên kế hoạch.", author: "" },
+            {cat:"day", text: "Mọi dòng sông đều đổ ra biển. Những lo âu hôm nay cũng sẽ trôi đi, hãy để chúng đi.", author: "" },
+            {cat:"day", text: "Bạn không cần phải trở thành một 'phiên bản hoàn hảo' của ai đó. Hãy là một 'phiên bản hành động' của chính mình.", author: "" },
+            {cat:"day", text: "Áp lực của Kim chỉ để gọt giũa Mộc thành hình. Đừng để nó đè bẹp sức sống của bạn.", author: "" },
+            {cat:"day", text: "Hít một hơi thật sâu. Bạn đang ở đây, ngay lúc này, và bạn đủ tốt.", author: "" },
+            {cat:"day", text: "Cái gì đẹp cũng có thời điểm. Đừng đợi đến khi mọi thứ hoàn hảo mới đi, vì khoảnh khắc sẽ qua mất.", author: "" },
+            {cat:"day", text: "Bản năng của bạn là vươn xa. Đừng để sự an toàn giả tạo kìm hãm đôi chân Giáp Ngọ của mình.", author: "" },
+            {cat:"day", text: "Vũ trụ đang biểu diễn một vở kịch rực rỡ. Bạn muốn làm khán giả qua màn hình hay người chứng kiến tận mắt?", author: "" },
+            {cat:"day", text: "Gió không bao giờ do dự, nó chỉ thổi. Hãy để trực giác dẫn đường, lý trí chỉ là người cầm bản đồ thôi.", author: "" },
+            {cat:"day", text: "Bớt suy nghĩ rác (overthinking), nạp thêm dữ liệu thực tế. Kết quả của bạn sẽ rõ ràng như một thuật toán tối ưu.", author: "" },
+            {cat:"day", text: "Xu hướng là làn gió, nền tảng là rễ cây. Giáp Mộc muốn vươn cao trong ngành AI thì rễ phải bám sâu vào cơ bản.", author: "" },
+            {cat:"day", text: "Chuyên gia không sinh ra từ lý thuyết. Họ sinh ra từ những lỗi 'Bug' đã được sửa. Bắt tay vào làm ngay!", author: "" },
+            {cat:"day", text: "Dừng phân tích, bắt đầu cảm nhận.", author: "" },
+            {cat:"day", text: "Quăng bản đồ sang một bên đi! Trái tim bạn đã thuộc đường rồi, việc của bạn chỉ là hít một hơi thật sâu và để linh cảm dẫn lối thôi.", author: "" },
+            {cat:"day", text: "Tín hiệu là 'Có'. Câu hỏi là 'Khi nào?'", author: "" },
+            {cat:"day", text: "Một bước chân thực tế đáng giá hơn một vạn dặm trong tâm tưởng.", author: "" },
+            {cat:"day", text: "Thảo nguyên bao la không hiện ra trong đầu kẻ đứng yên. Chỉ cần một cú phi nước đại thực sự, cả thế giới mới sẽ mở ra ngay dưới móng ngựa của bạn!", author: "" }
         ];
 
         // 2. Danh sách Ảnh nền (Tông xanh dương/phong cảnh)
@@ -320,7 +320,24 @@
             }
 
             // Random Quote
-            const randomQuote = quoteList[Math.floor(Math.random() * quoteList.length)];
+            // const randomQuote = quoteList[Math.floor(Math.random() * quoteList.length)];
+
+            const nowHour = new Date().getHours();
+            let availableQuotes;
+
+            if (nowHour >= 22 || nowHour <= 3) {
+                // Sau 22h chỉ lấy quote night
+                availableQuotes = quoteList.filter(q => q.cat === "night");
+    
+                // Nếu lỡ không có night thì fallback về full list
+                if (availableQuotes.length === 0) {
+                    availableQuotes = quoteList;
+                }
+            } else {
+                availableQuotes = quoteList;
+            }
+
+            const randomQuote = availableQuotes[Math.floor(Math.random() * availableQuotes.length)];
             localStorage.setItem('mySavedQuote', JSON.stringify(randomQuote));
 
             // Random Ảnh nền
