@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote Inspiration - Random Background</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Lớp nền */
+        #bg-layer {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: background-image 0.8s ease-in-out; /* Hiệu ứng chuyển ảnh mượt mà */
+            z-index: -1;
+        }
+
+        /* Lớp phủ tối để nổi bật chữ */
+        .overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 0;
+        }
+
+        .quote-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            padding: 0 20px;
+            text-align: center;
+            position: relative;
+            z-index: 5; /* Thấp hơn hạt rơi */
+        }
+
+        .quote-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 50px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            max-width: 700px;
+            width: 85%;
+            color: #f0f8ff; /* AliceBlue */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            margin-bottom: 30px;
+        }
+
+        .quote-text {
+            font-size: 1.8rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.5;
+        }
+
+        .author { font-size: 1.2rem; opacity: 0.8; font-weight: 300; }
+
+        .btn-action {
+            background: #2c5282; /* Blue */
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 16px 45px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 200; /* Cao nhất để bấm được */
+        }
+
+        .btn-action:hover {
+            background: #4299e1;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(66, 153, 225, 0.5);
+        }
+
+        .btn-secondary { background: rgba(255, 255, 255, 0.15); margin-top: 10px; }
+
+        /* Hạt rơi đè lên chữ */
+        .particle {
+            position: absolute;
+            top: -10%;
+            color: #fff;
+            user-select: none;
+            pointer-events: none;
+            z-index: 100; /* Cao hơn quote-box */
+            animation: fall linear infinite;
+        }
+
+        .footer-text {
+            margin-top: 25px;
+            color: #f0f8ff;
+            font-size: 1.1rem; /* Tăng cỡ chữ */
+            font-style: italic;
+            opacity: 0.8;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            max-width: 300px; /* Ép xuống dòng nếu chữ quá dài */
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+
+        /* Tối ưu riêng cho điện thoại */
+        @media (max-width: 600px) {
+        .footer-text {
+                font-size: 1.2rem; /* Trên điện thoại chữ sẽ to rõ hơn */
+                max-width: 250px;  /* Ép xuống dòng hẹp hơn để đẹp mắt */
+            }
+        }
+
+        @keyframes fall {
+            0% { top: -10%; transform: translateX(0) rotate(0deg); }
+            100% { top: 110%; transform: translateX(100px) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="bg-layer"></div>
+    <div class="overlay"></div>
+
+    <div class="quote-container">
+        <div class="quote-box">
+            <div class="quote-text" id="quote-display">...</div>
+            <div class="author" id="author-display"></div>
+        </div>
+        <div id="button-area"></div>
+    </div>
+
+    <script>
+        // 1. Danh sách Quotes
+        const quoteList = [
+            { text: "Mọi hành trình vạn dặm đều khởi nguồn từ một bước chân.", author: "Lão Tử" },
+            { text: "Bạn không sợ thất bại, bạn chỉ sợ mình không đủ giỏi — và chính nỗi sợ đó đang giữ bạn ở mức an toàn.", author: "" },
+            { text: "Có những cánh cửa không mở ra khi bạn sẵn sàng, mà mở ra khi bạn dám bước dù còn run.", author: "" },
+            { text: "Cảm giác mình thua kém không phải dấu hiệu nên rút lui, mà là bằng chứng bạn đã bước vào một căn phòng lớn hơn.", author: "" },
+            { text: "Bạn nghĩ quá nhiều về hậu quả, nhưng quên rằng không hành động cũng là một hậu quả.", author: "" },
+            { text: "Sự hoàn hảo bạn theo đuổi đôi khi chỉ là lớp áo đẹp của nỗi sợ bị đánh giá.", author: "" },
+            { text: "Không ai trở thành chuyên gia vì họ luôn tự tin; họ trở thành chuyên gia vì họ không biến mất khi còn chưa tự tin.", author: "" },
+            { text: "Mỗi lần bạn trì hoãn vì chưa đủ tốt, bạn đang chọn sự dễ chịu ngắn hạn thay cho phiên bản mạnh mẽ dài hạn.", author: "" },
+            { text: "Bạn không cần chắc chắn toàn bộ con đường, bạn chỉ cần đủ can đảm cho bước kế tiếp.", author: "" },
+            { text: "Đêm khuya khiến nỗi lo trông có vẻ lớn hơn thực tế; sáng mai tỉnh dậy, mọi thứ sẽ nhỏ lại.", author: "" },
+            { text: "Bạn không thiếu thời gian, bạn đang tiêu nó cho những thứ không dám nhìn lại vào sáng hôm sau.", author: "" },
+            { text: "Thức đến 2 giờ sáng không làm bạn tự do hơn, nó chỉ làm ngày mai của bạn yếu đi.", author: "" },
+            { text: "Dopamine rẻ luôn dễ kiếm; giá của nó là sự tập trung đắt giá mà bạn đánh mất.", author: "" },
+            { text: "Không phải bạn nghiện điện thoại, bạn đang trốn khỏi cảm giác phải bắt đầu.", author: "" },
+            { text: "Một giờ lướt vô thức có thể phá hỏng tám giờ kỷ luật bạn cố gắng xây dựng.", author: "" },
+            { text: "Thói quen xấu không hủy bạn trong một đêm, nó bào mòn bạn bằng những đêm như thế.", author: "" },
+            { text: "Bạn nói mình muốn đi khám phá thế giới, nhưng mỗi tối lại tự cắt ngắn năng lượng của ngày mai.", author: "" },
+            { text: "Sự thoải mái ngắn hạn luôn thì thầm rất dịu dàng, còn mục tiêu dài hạn thì nói ít và đòi hỏi nhiều.", author: "" },
+            { text: "Mỗi lần bạn đặt điện thoại xuống sớm hơn, bạn không mất niềm vui — bạn đang giành lại quyền kiểm soát.", author: "" },
+            { text: "Tắt màn hình không phải là bỏ lỡ điều gì, mà là chọn không bỏ lỡ chính mình.", author: "" },
+            { text: "Mỗi ngày bạn không đọc, thế giới vẫn tiến lên — chỉ có bạn đứng lại.", author: "" },
+            { text: "Kiến thức không làm bạn mệt; sự trì hoãn mới làm bạn nặng lòng.", author: "" },
+            { text: "Đọc mỗi ngày không phải để biết nhiều hơn người khác, mà để không thua chính mình của hôm qua.", author: "" },
+            { text: "Một trang tài liệu hôm nay có thể là nền móng cho một bước nhảy một năm nữa.", author: "" },
+            { text: "Bạn không trở thành chuyên gia trong một đột phá, mà trong hàng trăm lần đọc khi chẳng ai yêu cầu.", author: "" },
+            { text: "Không phải lúc nào bạn cũng hứng thú, nhưng bạn luôn có thể chọn nhất quán.", author: "" },
+            { text: "Đọc khi không ai ép bạn là lúc bạn thật sự xây dựng tương lai của mình.", author: "" },
+            { text: "Nếu bạn chỉ tiêu thụ nội dung dễ nuốt, bạn sẽ mãi đói với những vấn đề khó.", author: "" },
+            { text: "Mỗi ngày một chút hiểu sâu hơn là cách duy nhất để đi xa mà không ồn ào.", author: "" },
+            { text: "Bạn không cần đọc tất cả, bạn chỉ cần đọc đủ lâu để kiến thức bắt đầu kết nối.", author: "" },
+            { text: "Thói quen đọc không thay đổi bạn trong một tuần, nhưng nó âm thầm tái cấu trúc bạn trong vài năm.", author: "" },
+            { text: "Nếu hôm nay bạn không cập nhật, ngày mai bạn sẽ phải bắt kịp trong mệt mỏi.", author: "" },
+            { text: "Một trang tài liệu mỗi ngày nghe có vẻ nhỏ, nhưng một năm sau nó là khoảng cách.", author: "" },
+            { text: "Khi bạn đọc, bạn đang trò chuyện với người giỏi hơn mình — miễn phí.", author: "" },
+            { text: "Thời điểm để cập nhật kiến thức mới là NGAY BÂY GIỜ. Đừng đợi đến khi đọc xong cuốn sách tiếp theo", author: "" },
+            { text: "Đếm đến 5 và bước đi. Vũ trụ sẽ lo phần đường đi, việc của bạn là cất bước.", author: "" },
+            { text: "Sự hoàn hảo là một cái bẫy. Sự dang dở nhưng bắt đầu mới là hạt giống của thành công.", author: "" },
+            { text: "Ngọn lửa trong tim bạn cần hành động để cháy sáng, không phải cần sự lo âu để duy trì.", author: "" },
+            { text: "Đừng đợi đến khi thấy hết con đường. Chỉ cần thấy bước tiếp theo là đủ.", author: "" },
+            { text: "Hôm nay, hãy chọn làm điều bạn sợ nhất. Phía sau nỗi sợ là tự do.", author: "" },
+            { text: "Giáp Mộc cần đất để bám rễ. Hãy tập trung vào những việc nhỏ nhặt nhất ngay dưới chân bạn.", author: "" },
+            { text: "Kết quả thực tế là liều thuốc tốt nhất cho sự do dự.", author: "" },
+            { text: "Hôm nay, hãy hoàn thành thay vì chỉ lên kế hoạch.", author: "" },
+            { text: "Mọi dòng sông đều đổ ra biển. Những lo âu hôm nay cũng sẽ trôi đi, hãy để chúng đi.", author: "" },
+            { text: "Bạn không cần phải trở thành một 'phiên bản hoàn hảo' của ai đó. Hãy là một 'phiên bản hành động' của chính mình.", author: "" },
+            { text: "Áp lực của Kim chỉ để gọt giũa Mộc thành hình. Đừng để nó đè bẹp sức sống của bạn.", author: "" },
+            { text: "Hít một hơi thật sâu. Bạn đang ở đây, ngay lúc này, và bạn đủ tốt.", author: "" },
+            { text: "Cái gì đẹp cũng có thời điểm. Đừng đợi đến khi mọi thứ hoàn hảo mới đi, vì khoảnh khắc sẽ qua mất.", author: "" },
+            { text: "Bản năng của bạn là vươn xa. Đừng để sự an toàn giả tạo kìm hãm đôi chân Giáp Ngọ của mình.", author: "" },
+            { text: "Vũ trụ đang biểu diễn một vở kịch rực rỡ. Bạn muốn làm khán giả qua màn hình hay người chứng kiến tận mắt?", author: "" },
+            { text: "Gió không bao giờ do dự, nó chỉ thổi. Hãy để trực giác dẫn đường, lý trí chỉ là người cầm bản đồ thôi.", author: "" },
+            { text: "Bớt suy nghĩ rác (overthinking), nạp thêm dữ liệu thực tế. Kết quả của bạn sẽ rõ ràng như một thuật toán tối ưu.", author: "" },
+            { text: "Xu hướng là làn gió, nền tảng là rễ cây. Giáp Mộc muốn vươn cao trong ngành AI thì rễ phải bám sâu vào cơ bản.", author: "" },
+            { text: "Chuyên gia không sinh ra từ lý thuyết. Họ sinh ra từ những lỗi 'Bug' đã được sửa. Bắt tay vào làm ngay!", author: "" },
+            { text: "Dừng phân tích, bắt đầu cảm nhận.", author: "" },
+            { text: "Quăng bản đồ sang một bên đi! Trái tim bạn đã thuộc đường rồi, việc của bạn chỉ là hít một hơi thật sâu và để linh cảm dẫn lối thôi.", author: "" },
+            { text: "Tín hiệu là 'Có'. Câu hỏi là 'Khi nào?'", author: "" },
+            { text: "Một bước chân thực tế đáng giá hơn một vạn dặm trong tâm tưởng.", author: "" },
+            { text: "Thảo nguyên bao la không hiện ra trong đầu kẻ đứng yên. Chỉ cần một cú phi nước đại thực sự, cả thế giới mới sẽ mở ra ngay dưới móng ngựa của bạn!", author: "" }
+        ];
+
+        // 2. Danh sách Ảnh nền (Tông xanh dương/phong cảnh)
+        const bgList = [
+            "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1600&q=80",
+            "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1600&q=80",
+            "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600&q=80",
+            "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1600&q=80",
+            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1600&q=80",
+            "https://images.unsplash.com/photo-1464274977970-5203190548d1?w=1600&q=80", // Ngựa phi tự do trên đồng cỏ
+            "https://images.unsplash.com/photo-1491555103944-7c647fd857e6?w=1600&q=80", // Núi tuyết xanh lạnh cực kỳ hùng vĩ
+            "https://images.unsplash.com/photo-1439853949127-fa647821eba0?w=1600&q=80", // Hồ nước xanh biếc giữa lòng núi
+            "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1600&q=80", // Thuyền trên mặt hồ yên ả
+            "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1600&q=80", // Đỉnh núi tuyết dưới bầu trời sao
+            "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=1600&q=80", // Gió và rừng thông mờ ảo
+            "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=1600&q=80", // Ngựa trắng phi dưới tuyết
+            "https://images.unsplash.com/photo-1465919292275-c60ad29da028?w=1600&q=80", // Mây bay và gió trên đỉnh núi cao
+            "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1600&q=80", // Phong cảnh đồi núi xanh mướt
+            "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1600&q=80"  // Thác nước chảy giữa núi rừng
+        ];
+
+        // 3. Hiệu ứng hạt
+        const effectIcons = ['❄', '🌸', '🪶', '🍃', '✨'];
+        
+        // Trạng thái hiện tại
+        let currentIcon = localStorage.getItem('lastIcon') || '✨';
+
+        const quoteEl = document.getElementById('quote-display');
+        const authorEl = document.getElementById('author-display');
+        const btnArea = document.getElementById('button-area');
+        const bgLayer = document.getElementById('bg-layer');
+
+        function updateUI() {
+            const savedQuote = localStorage.getItem('mySavedQuote');
+            const savedBg = localStorage.getItem('lastBg') || bgList[0];
+            
+            // Cập nhật ảnh nền
+            bgLayer.style.backgroundImage = `url('${savedBg}')`;
+
+            if (savedQuote) {
+                const data = JSON.parse(savedQuote);
+                quoteEl.innerHTML = `"${data.text}"`;
+                // Kiểm tra: Nếu có author thì hiện, không thì xóa trắng
+                if (data.author && data.author.trim() !== "") {
+                    authorEl.innerHTML = `— ${data.author}`;
+                } else {
+                    authorEl.innerHTML = "";
+                }
+                btnArea.innerHTML = `
+        <button class="btn-action btn-secondary" onclick="pickEverything()">Gửi tín hiệu</button>
+        <div class="footer-text">
+            Mọi hành trình vạn dặm<br>đều khởi nguồn từ một bước chân
+        </div>
+    `;
+            } else {
+                quoteEl.innerHTML = "Mọi hành trình vạn dặm đều khởi nguồn từ một bước chân";
+                authorEl.innerHTML = `— Lão Tử`;
+                btnArea.innerHTML = `<button class="btn-action" onclick="pickEverything()">Gửi tín hiệu</button>`;
+            }
+        }
+
+        function pickEverything() {
+            // Rung điện thoại (50ms là một nhịp rung nhẹ, tinh tế)
+            if (navigator.vibrate) {
+                navigator.vibrate(50); 
+            }
+
+            // Random Quote
+            const randomQuote = quoteList[Math.floor(Math.random() * quoteList.length)];
+            localStorage.setItem('mySavedQuote', JSON.stringify(randomQuote));
+
+            // Random Ảnh nền
+            const randomBg = bgList[Math.floor(Math.random() * bgList.length)];
+            localStorage.setItem('lastBg', randomBg);
+
+            // Random Hiệu ứng
+            currentIcon = effectIcons[Math.floor(Math.random() * effectIcons.length)];
+            localStorage.setItem('lastIcon', currentIcon);
+
+            updateUI();
+        }
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            particle.innerHTML = currentIcon;
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.fontSize = (Math.random() * 15 + 15) + 'px';
+            particle.style.opacity = Math.random() * 0.7 + 0.3;
+            const duration = Math.random() * 5 + 6;
+            particle.style.animationDuration = duration + 's';
+            document.body.appendChild(particle);
+            setTimeout(() => { particle.remove(); }, duration * 1000);
+        }
+
+        setInterval(createParticle, 350);
+        updateUI();
+    </script>
+</body>
+</html>
