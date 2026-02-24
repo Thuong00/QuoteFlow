@@ -240,7 +240,18 @@
             "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1600&q=80", // Phong cảnh đồi núi xanh mướt
             "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1600&q=80"  // Thác nước chảy giữa núi rừng
         ];
-
+        const bgMobileList = [
+            "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80", // Núi tuyết dọc hùng vĩ
+            "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=80", // Đỉnh núi và sao đêm
+            "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&q=80", // Hồ nước bình minh
+            "https://images.unsplash.com/photo-1536431311719-398b6704d4cc?w=800&q=80", // Thác nước và sương mờ (gió)
+            "https://images.unsplash.com/photo-1551884831-bbf3cdc6469e?w=800&q=80", // Ngựa đứng giữa sương mù
+            "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80", // Rừng núi mờ ảo trong gió
+            "https://images.unsplash.com/photo-1505765050516-f72dcac9c60e?w=800&q=80", // Mặt hồ phẳng lặng xanh biếc
+            "https://images.unsplash.com/photo-1472791108553-c94051418d4b?w=800&q=80", // Núi cao vút tầm mắt
+            "https://images.unsplash.com/photo-1520114878144-612474792a55?w=800&q=80", // Rừng thông dưới trời tuyết
+            "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80"  // Dãy núi lớp lớp xanh mờ
+        ];
         // 3. Hiệu ứng hạt
         const effectIcons = ['❄', '🌸', '🪶', '🍃', '✨'];
         
@@ -292,7 +303,15 @@
             localStorage.setItem('mySavedQuote', JSON.stringify(randomQuote));
 
             // Random Ảnh nền
-            const randomBg = bgList[Math.floor(Math.random() * bgList.length)];
+            // const randomBg = bgList[Math.floor(Math.random() * bgList.length)];
+            let randomBg;
+            if (window.innerWidth < 600) {
+                // Nếu là điện thoại, lấy từ list ảnh dọc
+                randomBg = bgMobileList[Math.floor(Math.random() * bgMobileList.length)];
+            } else {
+                // Nếu là máy tính, lấy từ list ảnh ngang
+                randomBg = bgList[Math.floor(Math.random() * bgList.length)];
+            }
             localStorage.setItem('lastBg', randomBg);
 
             // Random Hiệu ứng
